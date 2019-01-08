@@ -23,7 +23,6 @@ function saveBookmark(e){
     localStorage.removeItem('test');
     console.log(localStorage.getItem('test'));
   */
-
   // Test if bookmarks is null
   if(localStorage.getItem('bookmarks') === null){
     // Init array
@@ -35,11 +34,21 @@ function saveBookmark(e){
   } else {
     // Get bookmarks from localStorage
     var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    //check whether url is already there
+    for(var i=0;i<bookmarks.length;i++) 
+    {
+  if( bookmarks[i].url==siteUrl && bookmarks[i].name==siteName) 
+  {
+  alert('Url and site already bookmarked');
+  document.getElementById('myForm').reset();	
+return false;
+   }
+}
     // Add bookmark to array
     bookmarks.push(bookmark);
     // Re-set back to localStorage
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-  }
+}
 
   // Clear form
   document.getElementById('myForm').reset();
